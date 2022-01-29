@@ -1,3 +1,8 @@
 c语言程序的思想 the thinking of the c language application
 1.枚举法[enumeration method]
 	concluded by examining all possible senarios for certain types of event
+#include <stdio.h>
+ int main()
+ {	printf("hello!world"\n);
+ 	return 0;
+ }
