@@ -6,3 +6,45 @@ c语言程序的思想 the thinking of the c language application
  {	printf("hello!world"\n);
  	return 0;
  }
+注意:不要用中文输入法.
+     ""内是原封不动输出的字节
+     
+例题:算找零
+   printf("23+43=\d \n",23+43);
+   printf("100-23=\d \n",100-23);
+   需要:
+    有地方放输入的数字;
+    有办法输入数字;
+    输入的数字能参与运算;
+题1.     change.c
+  #include<stdio.h>
+  int main()
+  {	int price=0;
+  	 printf("请输入金额(元);");
+	 scanf("%d,&price");
+	int change=100-price;
+	 printf("找您%d元"\n,change);
+  }
+  变量   int pirce=0;
+         这一行定义了变量,名字为price,类型是int,初始值是0.
+         变量是一个保存数据的地方,当需要再程序里保存数据时,如上面例子中要记录用户输入价格,就需要一个变量来保存他.用一个变量来保存了数据,它才能参加到后面的计算中
+         一般形式:<类型名称><变量名称>;
+         举例: int price;
+               int amount;
+  变量的名字--标识符
+         用来识别这个和那个的不同的名字.
+         构造规则:
+                基本原则:只能用字母,数字,下划线组成,开头不能用数字
+                c语言的关键字(保留字)不可以用作标识符
+                关键字:auto,break,case,char,const,continue,default,do,double,else,enum,extern,float,for,goto,if,int,long,register,return,short,signed,sizeof,static,struct,switch,typedef,union,unsigned,void,volatile,while,inline,restrict
+                 不需要背,程序会提示
+  赋值和初始化
+         int price =0;
+         等号把右边的数据交给左边,因为0是初始值,所以又叫初始化.
+      赋值:
+          在数学中,a=b表示关系,即a和b的值一样;
+          在程序设计中,a=b表示要求计算机做一个动作:将b的值赋给a.
+          关系是静态的,动作是动态的.在数学中a=b和b=a是等价的,再程序设计中则完全相反.
+          
+                 
+  
