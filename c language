@@ -45,6 +45,53 @@ c语言程序的思想 the thinking of the c language application
           在数学中,a=b表示关系,即a和b的值一样;
           在程序设计中,a=b表示要求计算机做一个动作:将b的值赋给a.
           关系是静态的,动作是动态的.在数学中a=b和b=a是等价的,再程序设计中则完全相反.
-          
+      初始化:
+          <类型名称><变量名称>=<初始值>;
+	  int price=0;
+	  int amount=100;
+	  组合变量定义的时候,也可以在这个定义中单独给单个变量赋初值,
+	  如:int price=0,amount=100;
+      表达式(expression):
+      	  "="是赋值运算符,有运算符的狮子叫做表达式.
+	  price=0;
+	  change=100-price;
+  变量类型
+    	  int price=0;
+	  这一行定义了变量,名字为price,类型是int,初始值是0.
+	  c语言是一种有类型的语言,所有的变量在使用之前必须定义或声明,所有的变量必须有确定的数据类型.数据类型表示在变量中存放什么样的数据,变量中只能存放指定类型的数据,程序运行过程中也不能改变变量的类型.
+  常量
+  	  int change=100-price;
+	  固定不变的数,是常数.直接写在程序里,我们称作直接量(literal).
+	  更好的方式,是定义一个常量:const int AMOUNT=100;
+      const
+          const是一个修饰符,加在int的前面,用来给这个变量加上一个const(不变的)的属性.这个const的属性表示这个变量的值一旦初始化,就不能再修改了.
+	  int change=AMOUNT-price;
+	  如果你试图对常量做修改,把它放在赋值运算符的左边.就会被编译器发现,指出为一个错误.
+题2    计算身高
+  #include<stdio.h>
+  main()
+  [	int foot;
+  	int inch;    
+	scanf("%d %d",&foot,&inch);
+	printf("身高是%f米.\n",((foot+inch/12)*0.3048));
+  ]
+  浮点数:
+  	  带小数点的数值.浮点这个词的本意就是指小数点是浮动的,是计算机内部表达非整数(包含分数和无理数)的一种方式.另一种方式叫做定点数,不过在c语言中你不会遇到定点数.人们借用浮点数这个词来表达所有的带小数点的数.
+       改进:(foot+inch/12)*0.3048->(foot+inch/12.0)*0.3048
+      double:
+      	inch是定义为int类型的变量,如果把int换成double,我们就把它改为double类型的浮点数变量了.
+	double的意思就是"双",它本来就是"双精度浮点数"的第一个单词,人们用来表示浮点数类型.除了double,还有float(意思是浮点!)表示单精度浮点数.
+       改进:int foot;
+  	    int inch;    
+	    scanf("%d %d",&foot,&inch);
+	    -->
+	    double foot
+       	    double inch;
+       	    scanf("%ld %ld",&foot,&inch);
+	    
+     
+  	
+      
+	  
                  
   
