@@ -70,11 +70,11 @@ c语言程序的思想 the thinking of the c language application
 题2    计算身高
   #include<stdio.h>
   main()
-  [	int foot;
+  {	int foot;
   	int inch;    
 	scanf("%d %d",&foot,&inch);
 	printf("身高是%f米.\n",((foot+inch/12)*0.3048));
-  ]
+  }
   浮点数:
   	  带小数点的数值.浮点这个词的本意就是指小数点是浮动的,是计算机内部表达非整数(包含分数和无理数)的一种方式.另一种方式叫做定点数,不过在c语言中你不会遇到定点数.人们借用浮点数这个词来表达所有的带小数点的数.
        改进:(foot+inch/12)*0.3048->(foot+inch/12.0)*0.3048
@@ -88,10 +88,45 @@ c语言程序的思想 the thinking of the c language application
 	    double foot
        	    double inch;
        	    scanf("%ld %ld",&foot,&inch);
-	    
-     
-  	
-      
-	  
+  表达式:
+  	  一个表达式是一系列运算符和算子的组合,用来计算一个值.
+      运算符:
+      	  运算符(operator)是指进行运算的动作,比如加法运算符"+",减法运算符"-".
+	  算子(operand)是指参与运算的值,这个值可能是常数,也可能是变量,还可能是一个方法的返回值.
+题3      计算时间差
+  #include<stdio.h>
+  main()
+  {     int hour1,minute1;
+  	int hour2,minute2;
+	int t1,t2;
+	int t;
+	scanf("%d %d",&hour1,&minute1);
+	scanf("%d %d",&hour2,&minute2);
+	t1=hour1*60+minute1;
+	t2=hour2*60+minute2;
+	t=t2-t1;
+	printf("时间差是%d小时%d分钟",t/60,t%60);
+   }  
+  	t1=hour1*60+minute1;->转换分钟为单位
+	t/60->小时部分;t%60->分钟部分
+  复合赋值
+        五个运算符,+-*/%,可以和赋值运算符"="结合起来,形成复合赋值运算符:"+=","-=","*=","/="和"%="
+	total+=5;
+	<=>
+	total=total+5;
+        注:两个运算符之间不要有空格
+     辨析:
+        total+=(sum+100)/2;
+	<=>total=total+(sum+100)/2;
+	total*=sum+12;
+	<=>total=total*(sum+12);
+  递增递减运算符:
+  	"++"和"--"是两个很特殊的运算符,他们是单目运算符,这个算子还必须是变量.这两个运算符分别叫做递增和递减运算符,他们的作用就是给这个变量+1或者-1.
+     前缀后缀:
+        放在变量之前或者之后,分别是前缀形式和后缀形式
+        表达的值也不同a++表达的是a的值,之后再加1,++a是a+1的值.
+   
+	
+	
                  
   
