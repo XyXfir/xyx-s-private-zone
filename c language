@@ -140,6 +140,25 @@ c语言程序的思想 the thinking of the c language application
     scanf("%d %d",&a,&b);
     double c=(a+b)/2.0;       *2.0是因为有小数,没有".0"则会输出一个整数.
     printf(""%d和%d的平均值=%f\n",a,b,c);
+##if语句##
+    一个基本的if语句有一个关键字if开头,跟上在括号里的一个表示条件的逻辑表达式.如果表示条件的逻辑表达式的结果不是零,那么就执行后面跟着的这对大括号中的语句,否则就 跳过这些语句不执行,而继续下面的其他语句.
+    *if语句这一行结束的时候并没有表示语句结束的";",而 后面的赋值语句卸载if的下一行,并且缩进了,在这一行结束的时候有一个表示语句结束的";".这表明这条赋值语句是if语句的一部分,if语句拥有和控制这条赋值语句,决定它是否要被执行.
+    if(total>amount)
+    	total+=amount+10; 
+题6     计算薪水
+    const double RATE=8.25;
+    const int STANDARD=40;
+    double pay=0.0;
+    int hours;
+    printf("请输入工作的小时数:");
+    scanf("%d",&hours);
+    printf("\n");
+    if(hours>STANDARD)
+    	pay=STANDARD*RATE+(hours-STANDARD)*(RATE*1.5);
+    else
+    	pay=hoours*RATE;
+    printf("应付工资:%f"\n,pay);
+    
     
 	
         
