@@ -210,6 +210,12 @@ c语言程序的思想 the thinking of the c language application
      }
      printf("时间差是%d小时%d分钟",ih,im);
    }  
+        if语句常见的错误:
+	忘了大括号;:永远在if和else后面加上大括号,即使当时后面只有一条语句.
+        if后面的分号:一定不能在if后面加";"
+        错误使用==和=; 
+        使人困惑的else;
+	*warning一定要给予尊重! 
    
     
   
