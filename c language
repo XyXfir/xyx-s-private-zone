@@ -213,16 +213,58 @@ c语言程序的思想 the thinking of the c language application
         if语句常见的错误:
 	忘了大括号;:永远在if和else后面加上大括号,即使当时后面只有一条语句.
         if后面的分号:一定不能在if后面加";"
-        错误使用==和=; 
+        错误使用==和=:"=="是关系运算符而"="是赋值运输符,意义不同.
         使人困惑的else;
 	*warning一定要给予尊重! 
-   
-    
+##switch-case##
+        if(type==1)				switch(type)
+         printf("ni hao");			{  case 1:
+        else if(type==2)				printf("早上好");
+  	  printf("早上好");			     break;
+        else if(type==3)			   case 2:
+  	  printf("中午好");			     printf("中午好");
+        else if(type==4)				break;
+  	  printf("晚上好");			case 3:
+        else						printf("晚上好");
+      	  printf("啊?");    		               break;
+					           case 4:
+					        	printf("再见");
+					        	break;
+					          default:
+					        
+						printf("啊?");
+					}
   
-    
-    
-    
-    
+    不同:if语句是从第一个关系按顺序依次判断
+        而switch语句直接选择与之相匹配的表达式再进行按顺序执行
+  switch(控制表达式)
+  {
+   case 常量:
+    语句
+    ...
+   default:
+    语句
+    ...
+  }
+  	控制表达式只能是整数(int)类型
+  	常量可以是常数,也可以是常数计算的表达式
+    break:阻止程序继续运行.
+  级联的if-else if
+	格式:if()
+		{}
+	else{if()
+		{}
+		}
+  嵌套的if-else 
+        格式:if()
+	{if{}
+	 else{
+	 	if{}
+	 	else{}
+	     }
+	 }
+  else的匹配:
+       总是和最近的那个if匹配
     
     
     
