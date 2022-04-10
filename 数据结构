@@ -225,7 +225,7 @@ ADT Complex
          2.销毁线性表DestroyList(&L):释放线性表L占用的内存空间
          3.判断线性表是否为空表ListEmpty(L):若L为空表,则返回真,否则返回假
          4.求线性表的长度ListLength(L):返回L中元素个数n
-         5.输出线性表DispList(L):线性表不为空时,顺序显示L中各节点的值域 
+         5.输出线性表PrintList(L):线性表不为空时,顺序显示L中各节点的值域 
          6.求线性表L中指定位置的某个数据元素GetElem(L,i,&e):用e返回L中第i(1<=i<=n)个元素的值
          7.定位查找LocateElem(L,e):返回L中第一个值域与e相等的逻辑位序若这样的元素不存在,怎返回为0
          8.插入一个数据元素ListInsert(&L,i,e)在L的第i(1<=i<=n)个元素之前插入新的元素e,L的长度加1         
@@ -234,17 +234,148 @@ ADT Complex
          直接使用它来存放数据---作为存放数据的容器    
          直接使用它的基本运算---完成更复杂的功能
 2.1.3线性表的知识结构
-         
-
-
-
-
-
-
-
-
-
-
-         
-       
-       
+         线性表的概念->线性表ADT=逻辑结构+基本运算(运算描述)
+               |                    |
+               |                逻辑特性
+        线性表的存储结构:   1.顺序存储结构->顺序表中基本运算的实现
+               |           2.链式存储结构: 1.单链表
+               |                          2.双链表
+               |                          3.循环链表
+          线性表的应用
+               |
+          特殊线性表-有序表
+          
+          
+2.2线性表的顺序存储结构
+2.2.1线性表的顺序存储--顺序表
+         线性表的顺序存储结构:把线性表中的所有元素按照顺序存储方法进行存储
+                             (按逻辑顺序依次存储到存储器中一片连续的存储空间中)
+         线性表(a1,a2,...,ai,...,an)
+         直接映射到
+               0, 1, ..,i-1,..,n-1,..MaxSize-1
+         顺序表a1,a2,...,ai,...,an, ..........,n->length         
+顺序表类型定义:
+         typedef struct
+         {      ElemType data[MaxSize];
+                int length
+         }SqList;                            //顺序表类型       
+         其中data成员存放元素,length成员存放线性表的实际长度
+         说明:注意逻辑位序和物理位序相差1
+2.2.2顺序表运算的实现
+1.建立顺序表
+         a[0...n-1]->顺序表L-整体创建顺序表
+         int CreatList(SqList &L,int n) 
+	{
+		L.elem=(ElemType*)malloc(sizeof(ElemType)*LISTINITSIZE);
+		if(!L.elem)     //L.elem为空 
+		{       exit(-1);   //内存返还出错 
+		}
+		L.length=n;
+		L.listsize=LISTINITSIZE;
+		printf("请输入%d个数据\n",n); 
+		for(int i=1;i<=L.length;i++)
+		{       scanf("%d",&L.elem[i-1]);
+		}
+		 return 1;      //成功 
+	}
+算法参数说明
+         1.顺序表指针的含义
+         2.顺序表指针引用:
+         int CreatList(SqList &L,int n) 
+         "SqList &L"引用参数,将执行结果传回实参
+         "&"引用符号放在形参前面
+         输出型参数均为使用"&",不论参数值是否改变
+2.顺序表基本运算算法
+1.初始化线性表InitList(&L)
+         该运算结果是构造一个空的线性表L,实际上只需将length成员设置为0即可       
+          initlist(SqList &L)
+	{       L.elem=(ElemType*)malloc(sizeof(ElemType)*LISTINITSIZE);   //分配存放线性表的顺序表空间
+	        if(!L.elem)
+		{exit(-1);
+                }
+		L.length=0;
+		L.listsize=LISTINITSIZE;
+		return 1 ;
+	}
+2.销毁线性表DestroyList(&L) 
+        该运算结果是释放线性表L占用内存空间
+        int DestroyList(&L)
+        {free(L);}
+        释放L所指向的空间
+3.判断线性表是否为空表ListEmpty(L)
+        该运算返回一个值表示L是否为空表,若L为空表,则返回true,否则返回false 
+        bool ListEmpty(SqList *L)
+        {return(L.length==0);}
+4.求线性表的长度ListLength(L)
+        int ListLength(SqList *L)
+        {return(L.length);}
+5.输出线性表PrintList(L)
+        该运算当线性表L不为空时,顺序显示L中各元素的值
+        void PrintList(SqList L)
+	{       printf("该顺序表输出为:\n");
+			for(int i=1;i<=L.length;i++)
+		{       printf("%3d",L.elem[i-1]);
+		}
+		printf("\n");
+	}
+6.求线性表L中指定位置的某个数据元素GetElem(L,i,&e)
+7.定位查找LocateElem(L,e):
+        该运算顺序查找第1个值域与e相等的元素的逻辑位序,若这样的元素不存在,则返回值为0
+        int LocateElem(SqList L,ElemType x)
+        {       int i=1;
+	        while(i<=L.length&&L.elem[i-1]!=x) 
+		i++;
+	
+	        if(i<=L.length)
+	        {return i;
+                }
+	        else { return 0;
+	        }
+        }
+8.插入一个数据元素ListInsert(&L,i,e)
+        该运算在顺序表L的第i(1<=i<=ListLength(L)+1)个位置上插入新的元素e
+       int ListInsert(SqList &L,int i,ElemType x) //表第i个位置插入一个数 
+	{ 
+		if(i<1||i>L.length+1)  //1~n+1 
+		{       return 0;
+		}
+		if(L.length>=L.listsize)
+		{
+		 L.elem=(ElemType*)realloc(L.elem,(L.listsize+INCREMENT)*sizeof(ElemType));
+		 if(!L.elem)
+		 {      exit(-2);     //内存溢出 
+                 }
+		L.listsize+=INCREMENT;
+		}
+		for(int j=L.length-1;j>=i-1;j--) 
+		{
+			L.elem[j+1]=L.elem[j];
+		}
+		L.elem[i-1]=x;
+		L.length++;
+		return 1 ;
+	}
+        对于本算法来说,元素移动的次数不仅与表长L.length=n有关,而且与插入位置有关
+        当i=n+1时,移动次数为0;                  算法最好时间复杂度为O(1)
+        当i=1时,移动次数为n,达到最大值;          算法最坏时间复杂度为O(n)
+ 平均情况分析
+        ^a1^a2^...^ai^ai+1^...^an^ 在线性表L中共有n+1个可以插入的元素的地方
+        在插入元素ai时,若为等概率情况,则pi=1/(n+1)
+        此时需要将ai~an的元素均后移一个位置,共移动n-i+1个元素
+        所以在长度为n的线性表中插入一个元素时所需要移动元素的平均次数为:n/2
+        因此插入算法的平均时间复杂度为O(n)
+  9.删除数据元素ListDelete(&L,i,&e)     
+        int ListDlete(SqList &L,int i,ElemType &x)
+{
+	if(i<1||i>L.length)
+	{
+		return 0;   //1~n
+	}
+	x=L.elem[i-1];
+	for(int j=i;j<=L.length-1;j++)
+	{
+		 L.elem[j-1]=L.elem[j];
+	}
+	L.length--;
+	return 1;
+}
