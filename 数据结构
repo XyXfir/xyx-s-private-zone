@@ -256,7 +256,7 @@ ADT Complex
          顺序表a1,a2,...,ai,...,an, ..........,n->length         
 顺序表类型定义:
          typedef struct
-         {      ElemType data[MaxSize];
+         {      ElemType elem[MaxSize];
                 int length
          }SqList;                            //顺序表类型       
          其中data成员存放元素,length成员存放线性表的实际长度
@@ -335,7 +335,7 @@ ADT Complex
 8.插入一个数据元素ListInsert(&L,i,e)
         该运算在顺序表L的第i(1<=i<=ListLength(L)+1)个位置上插入新的元素e
        int ListInsert(SqList &L,int i,ElemType x) //表第i个位置插入一个数 
-	{ 
+	  { 
 		if(i<1||i>L.length+1)  //1~n+1 
 		{       return 0;
 		}
@@ -354,28 +354,88 @@ ADT Complex
 		L.elem[i-1]=x;
 		L.length++;
 		return 1 ;
-	}
-        对于本算法来说,元素移动的次数不仅与表长L.length=n有关,而且与插入位置有关
-        当i=n+1时,移动次数为0;                  算法最好时间复杂度为O(1)
-        当i=1时,移动次数为n,达到最大值;          算法最坏时间复杂度为O(n)
+	 }
+         对于本算法来说,元素移动的次数不仅与表长L.length=n有关,而且与插入位置有关
+         当i=n+1时,移动次数为0;                  算法最好时间复杂度为O(1)
+         当i=1时,移动次数为n,达到最大值;          算法最坏时间复杂度为O(n)
  平均情况分析
-        ^a1^a2^...^ai^ai+1^...^an^ 在线性表L中共有n+1个可以插入的元素的地方
-        在插入元素ai时,若为等概率情况,则pi=1/(n+1)
-        此时需要将ai~an的元素均后移一个位置,共移动n-i+1个元素
-        所以在长度为n的线性表中插入一个元素时所需要移动元素的平均次数为:n/2
-        因此插入算法的平均时间复杂度为O(n)
+         ^a1^a2^...^ai^ai+1^...^an^ 在线性表L中共有n+1个可以插入的元素的地方
+         在插入元素ai时,若为等概率情况,则pi=1/(n+1)
+         此时需要将ai~an的元素均后移一个位置,共移动n-i+1个元素
+         所以在长度为n的线性表中插入一个元素时所需要移动元素的平均次数为:n/2
+         因此插入算法的平均时间复杂度为O(n)
   9.删除数据元素ListDelete(&L,i,&e)     
-        int ListDlete(SqList &L,int i,ElemType &x)
-{
-	if(i<1||i>L.length)
+         int ListDlete(SqList &L,int i,ElemType &x)
 	{
-		return 0;   //1~n
+		if(i<1||i>L.length)
+		{
+			return 0;   //1~n
+		}
+		x=L.elem[i-1];
+		for(int j=i;j<=L.length-1;j++)
+		{
+			 L.elem[j-1]=L.elem[j];
+		}
+		L.length--;
+		return 1;
 	}
-	x=L.elem[i-1];
-	for(int j=i;j<=L.length-1;j++)
-	{
-		 L.elem[j-1]=L.elem[j];
-	}
-	L.length--;
-	return 1;
-}
+2.2.3顺序表算法设计
+         顺序表算法设计:数据采用顺便虚表存储,利用顺序表的基本操作来完成求解任务
+	 
+	 例2-1已知长度为n的线性表A采用顺序存储结构.设计一个时间复杂度为O(n) 空间复杂度O(1)的算法,该算法删除线性表中所有值为x的数据元素
+	 以下两种方法都不满足要求
+	 如果每删除一个值为x的元素都进行移动,其时间复杂度为O(n^2)空间复杂度为O(1)
+	 如果借助一个新的顺序表,存放将A中所有不为x的元素,其时间复杂度为O(n)空间复杂度为O(n)
+	 
+	 解法一:设删除A中所有值等于x元素后的顺序表为A1,显然A1包含在A中,为此A1重用A的空间
+	 思路:扫描顺序表A,重建A只包含不等于x的元素  
+	 
+	 对应算法:void delnodel ( SqList &A, ElemType x )
+ 		{	int k,i;		//k记录值不等于x的元素个数
+ 			for (i=0:i<A.length;i++)
+ 			if(A-> data[i]!=x) 	//若当前元素不为，将其插入 A 中
+			{	 A.elem[k]=A.elem[i];
+				 k++		//不等于x的元素增1
+				 A.length =k;   //顺序表 A 的长度等于 k 
+
+	 算法1：类似于建顺序表
+	 解法二:用k记录顺序表A中等于x的元素个数,一边扫描A一边统计k值
+	 思路:将不为x的元素前移k个位置,最后修改A的长度
+	 
+	 对应算法:void delnode2( SqList *&4, ElemType x )
+ 		{	int k=0, i=0;		// k 记录值等于 x 的元素个数
+ 			while ( i <4-slength)
+			{ if (A.elem[i]==x)	//元素值为x时k增1
+			  k++;
+ 			  else 			//当前元素不为时将其前移 k 个位置
+			  A.elem[i-k]=A.elem[i];
+			  i++
+			}
+ 			A.length==k;  	 	//顺序表4的长度递减 k 
+		}
+	 例2-2设顺序表L有10个整数,设计一个算法,以第一个元素为分界线(基准),将所有小于等于它的元素移到该元素的前面,将所有大于他的元素移到该元素的后面.
+	 解法:pivot=L.elem[0](基准)
+	       j从后往前找小于等于pivot的元素:前移,i从前往后找大于pivot的元素:后移
+	 对应算法:void move2(SqList &L)
+ 		 {	 int i=0, j=L.length -1;
+ 			 ElemType pivot=L.elem[0];	//以 data [0]为基准 
+			 while ( i < j )
+ 			 { 	 while (j>i&&L.elem[j]>pivot)
+			 		j--;		//从右向左扫描，找一个<=pivot的elem[j] 
+ 				L.elem[i]=L.elem[j];	//将其放入elem[i]处
+ 				while (i<j&&L.elem[i]<=pivot)
+					i++; 		//从左向右扫描，找一个＞pivot的记录elem[i] 
+ 				L.elem[i]=L.elem[i];	//将其放入elem[j]处
+			 }
+		 L.elem[i]=pivot;			//放置基准
+		 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
