@@ -490,7 +490,47 @@ ADT Complex
 		r.next=NULL                                  //尾节点next域置为NULL
          }
 3.线性表基本运算在单链表上的实现
-	 1.
+	  1.初始化线性表InitList(&L)
+	 释放单链表L占用的内存空间,即创建一个头节点
+	 void InitList(LinkList &L)
+	 {      L=(LinkList*)malloc(sizeof(LinkList));       //创建头节点
+	        L.next=NULL;
+	 }
+         2.销毁线性表DestroyList(&L)
+	 释放单链表L占用的内存空间,即逐一释放全部节点的空间
+	 void DestroyList(LinkList &L)
+	 {     LinkList *pre=L,*p=L.next           //pre指向*p的前趋节点
+	       while(!P)                           //扫描单链表
+               {    free(pre);                     //释放*pre节点
+	            pre=p;                         //pre p同步后移一个节点
+		    p=pre.next;
+	       }     
+               free(pre);                          //循环结束时,p为NULL,pre指向尾节点,释放它      
+         }
+         3.判断线性表是否为空表ListEmpty(L)
+	 若单链表L没有数据节点,则返回真,否则返回假
+	 bool ListEmpty(LinkList &L)
+	 {     return(L.next==NULL);
+	 }
+         4.求线性表的长度ListLength(L)
+	 返回L中数据节点个数
+	 int ListLength(LinkList &L))
+	 {     int n=0;
+	       LinkList *p=L;                     //p指向头节点,n置为0(即头节点的序号为0)
+	       while(!p.next)
+	       {     n++;
+	             p=p.next;
+	       }
+	       return(n);                         //循环结束时,p指向尾节点,其序号n为节点个数   
+	 }
+         5.输出线性表PrintList(L):线性表不为空时,顺序显示L中各节点的值域 
+         6.求线性表L中指定位置的某个数据元素GetElem(L,i,&e):用e返回L中第i(1<=i<=n)个元素的值
+         7.定位查找LocateElem(L,e):返回L中第一个值域与e相等的逻辑位序若这样的元素不存在,怎返回为0
+         8.插入一个数据元素ListInsert(&L,i,e)在L的第i(1<=i<=n)个元素之前插入新的元素e,L的长度加1         
+         9.删除数据元素ListDelete(&L,i,&e):
+
+
+
 
 
 
